@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  나를 소개하는 웹페이지 (Codyssey AI 올인원 본과정 미션)
+  - 외부 라이브러리 없이 순수 HTML / CSS / JavaScript 로만 작성
+  - 인라인 스타일 속성과 인라인 이벤트 핸들러 속성은 쓰지 않는다
+       (스타일은 전부 CSS 파일에서, 이벤트는 전부 addEventListener 로 연결)
+  ============================================================
+  lang="ko"  : 화면 낭독기(스크린리더)가 한국어로 읽도록 알려준다
+  data-theme : 다크모드 상태를 담는 속성. CSS 의 [data-theme="dark"] 와 짝을 이룬다
+-->
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <!-- 반응형의 출발점: 뷰포트를 기기 실제 너비로 맞춘다. 이게 없으면 모바일이 980px 로 축소 렌더링된다 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="웹 프론트엔드를 배우는 개발자 해은의 포트폴리오입니다.">
+  <title>해은 | 프론트엔드 포트폴리오</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <!-- 외부 스타일시트 연결 (구조=HTML / 표현=CSS 분리) -->
+  <link rel="stylesheet" href="css/style.css">
+  <!--
+    defer: HTML 파싱을 멈추지 않고 내려받았다가, 파싱이 끝난 뒤 순서대로 실행한다.
+           덕분에 스크립트에서 querySelector 를 써도 요소가 이미 존재한다.
+           config.js 가 먼저 실행되어야 main.js 가 그 설정값을 쓸 수 있다(순서 보장).
+  -->
+  <script src="js/config.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- 키보드 사용자를 위한 건너뛰기 링크 (Tab 을 누르면 나타난다) -->
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <!-- ========================= HEADER / NAV ========================= -->
+  <header class="header" id="header">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="nav__logo" href="#hero">
+        <span class="nav__logo-mark" aria-hidden="true">H</span>
+        <span class="nav__logo-text">haeun.dev</span>
+      </a>
+
+      <!-- 모바일에서는 숨겨졌다가 햄버거 버튼으로 열리는 메뉴 -->
+      <ul class="nav__menu" id="nav-menu">
+        <li class="nav__item"><a class="nav__link" href="#hero">홈</a></li>
+        <li class="nav__item"><a class="nav__link" href="#about">소개</a></li>
+        <li class="nav__item"><a class="nav__link" href="#skills">기술</a></li>
+        <li class="nav__item"><a class="nav__link" href="#projects">프로젝트</a></li>
+        <li class="nav__item"><a class="nav__link" href="#contact">연락처</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <!-- 다크모드 토글: aria-pressed 로 현재 눌림 상태를 보조기기에 알린다 -->
+        <button class="icon-btn" id="theme-toggle" type="button"
+                aria-label="다크 모드 전환" aria-pressed="false">
+          <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"></path>
+          </svg>
+          <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path>
+          </svg>
+        </button>
+
+        <!-- 햄버거 버튼: 데스크톱에서는 CSS 로 숨긴다 -->
+        <button class="icon-btn nav__toggle" id="nav-toggle" type="button"
+                aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav__bar" aria-hidden="true"></span>
+          <span class="nav__bar" aria-hidden="true"></span>
+          <span class="nav__bar" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============================ MAIN ============================ -->
+  <main id="main">
+
+    <!-- ---------------------------- HERO ---------------------------- -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <p class="hero__greeting reveal">안녕하세요 👋</p>
+        <h1 class="hero__title reveal">
+          저는 <span class="hero__name">해은</span>입니다.<br>
+          <!-- 타이핑 효과가 들어갈 자리. 글자는 JS 가 채운다 -->
+          <span class="hero__typing" id="typing" aria-live="polite"></span><span class="hero__cursor" aria-hidden="true"></span>
+        </h1>
+        <p class="hero__desc reveal">
+          브라우저가 이해하는 세 가지 언어(HTML·CSS·JavaScript)로
+          <strong>사용자의 행동이 화면으로 이어지는 과정</strong>을 만드는 일을 좋아합니다.
+        </p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--primary" href="#projects">프로젝트 보기</a>
+          <a class="btn btn--ghost" href="#contact">연락하기</a>
+        </div>
+      </div>
+      <a class="hero__scroll-hint" href="#about" aria-label="아래로 스크롤">
+        <span aria-hidden="true">↓</span>
+      </a>
+    </section>
+
+    <!-- ---------------------------- ABOUT --------------------------- -->
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">About</p>
+          <h2 class="section__title">저를 소개합니다</h2>
+        </header>
+
+        <div class="about">
+          <figure class="about__figure reveal">
+            <!-- alt: 이미지가 안 보이는 상황에서도 의미가 전달되도록 구체적으로 작성 -->
+            <img class="about__photo" src="images/profile.svg"
+                 alt="노트북 앞에 앉아 코드를 작성하는 해은의 일러스트 프로필"
+                 width="320" height="320">
+            <figcaption class="about__caption">Codyssey AI 올인원 2기</figcaption>
+          </figure>
+
+          <div class="about__body reveal">
+            <p class="about__text">
+              코디세이에서 자기주도 동료학습으로 개발을 배우고 있습니다.
+              혼자 끝까지 붙잡아 본 뒤 동료에게 질문하고, 제가 이해한 것을
+              다시 설명해 보는 과정에서 가장 많이 배웁니다.
+            </p>
+            <p class="about__text">
+              이 페이지도 프레임워크 없이 처음부터 만들었습니다.
+              화면 하나하나가 <em>이벤트 → 상태 변경 → 렌더링</em> 이라는
+              같은 흐름으로 움직이도록 설계했습니다.
+            </p>
+
+            <dl class="about__facts">
+              <div class="about__fact">
+                <dt>관심 분야</dt>
+                <dd>프론트엔드 · UI 인터랙션</dd>
+              </div>
+              <div class="about__fact">
+                <dt>지금 배우는 것</dt>
+                <dd>DOM · 비동기 · 곧 React</dd>
+              </div>
+              <div class="about__fact">
+                <dt>학습 방식</dt>
+                <dd>동료학습 · 설명하며 정리하기</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------- SKILLS -------------------------- -->
+    <section class="section section--alt" id="skills">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Skills</p>
+          <h2 class="section__title">사용하는 기술</h2>
+        </header>
+
+        <!-- 목록 성격의 데이터이므로 ul/li 로 마크업한다 -->
+        <ul class="skills" id="skill-list">
+          <!-- 카드는 JS 가 config.js 의 데이터로 생성한다 (template literal + map 연습) -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- --------------------------- PROJECTS ------------------------- -->
+    <section class="section" id="projects">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Projects</p>
+          <h2 class="section__title">GitHub 저장소</h2>
+          <p class="section__desc">
+            GitHub API 로 저장소를 실시간으로 불러옵니다.
+          </p>
+        </header>
+
+        <!-- 언어별 필터 버튼 (보너스 과제). 버튼은 JS 가 데이터로부터 만든다 -->
+        <div class="filters" id="filters" role="group" aria-label="프로그래밍 언어로 프로젝트 필터"></div>
+
+        <!--
+          상태 표시 영역: 로딩 / 에러 / 빈 상태가 여기에 렌더링된다.
+          aria-live="polite" 로 상태가 바뀌면 스크린리더가 읽어준다.
+        -->
+        <div class="projects__status" id="projects-status" aria-live="polite"></div>
+
+        <!-- 성공 상태의 카드가 들어가는 그리드 -->
+        <div class="projects" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- --------------------------- CONTACT -------------------------- -->
+    <section class="section section--alt" id="contact">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="section__eyebrow">Contact</p>
+          <h2 class="section__title">연락 주세요</h2>
+          <p class="section__desc">함께 공부하고 싶은 주제가 있다면 편하게 남겨주세요.</p>
+        </header>
+
+        <!--
+          novalidate: 브라우저 기본 검증 UI 를 끄고 JS 로 직접 검증한다.
+                      (검증 로직을 직접 만들어 보는 것이 이 과제의 목적)
+        -->
+        <form class="form reveal" id="contact-form" novalidate>
+          <div class="form__row">
+            <!-- label 의 for 와 input 의 id 가 일치해야 라벨 클릭 시 입력창이 포커스된다 -->
+            <label class="form__label" for="name">이름</label>
+            <input class="form__input" type="text" id="name" name="name"
+                   placeholder="홍길동" autocomplete="name"
+                   aria-describedby="name-error">
+            <p class="form__error" id="name-error" role="alert"></p>
+          </div>
+
+          <div class="form__row">
+            <label class="form__label" for="email">이메일</label>
+            <input class="form__input" type="email" id="email" name="email"
+                   placeholder="you@example.com" autocomplete="email"
+                   aria-describedby="email-error">
+            <p class="form__error" id="email-error" role="alert"></p>
+          </div>
+
+          <div class="form__row">
+            <label class="form__label" for="message">메시지</label>
+            <textarea class="form__input form__input--area" id="message" name="message"
+                      rows="5" placeholder="어떤 이야기든 좋아요."
+                      aria-describedby="message-error"></textarea>
+            <p class="form__error" id="message-error" role="alert"></p>
+          </div>
+
+          <button class="btn btn--primary btn--block" type="submit">보내기</button>
+
+          <!-- 제출 성공 메시지 자리 -->
+          <p class="form__success" id="form-success" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================== FOOTER =========================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© <span id="year"></span> 해은. All rights reserved.</p>
+      <ul class="footer__social">
+        <li>
+          <a class="footer__link" id="footer-github" href="https://github.com" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a class="footer__link" href="mailto:haeunyn@gmail.com">Email</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- 스크롤 탑 버튼: 일정 높이 이상 내려가면 나타난다 -->
+  <button class="scroll-top" id="scroll-top" type="button" aria-label="페이지 맨 위로 이동">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+</body>
+</html>
