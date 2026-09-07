@@ -7,16 +7,14 @@
 
 | 항목 | 주소 |
 | --- | --- |
-| 배포 사이트 | `https://<본인아이디>.github.io/<저장소이름>/` ← **배포 후 채워 넣기** |
-| GitHub 저장소 | `https://github.com/<본인아이디>/<저장소이름>` ← **채워 넣기** |
+| 배포 사이트 | **https://haeunyn.github.io/my-portfolio/** |
+| GitHub 저장소 | **https://github.com/haeunyn/my-portfolio** |
 
 ## 📸 스크린샷
 
 | 데스크톱 | 모바일 | 다크 모드 |
 | --- | --- | --- |
-| ![데스크톱](images/screenshot-desktop.png) | ![모바일](images/screenshot-mobile.png) | ![다크모드](images/screenshot-dark.png) |
-
-> 스크린샷 3장은 **배포 후 직접 촬영해서** `images/` 에 넣어주세요. (제출물 필수 항목)
+| ![데스크톱 화면](images/screenshot-desktop.jpg) | ![모바일 화면](images/screenshot-mobile.png) | ![다크 모드 화면](images/screenshot-dark.jpg) |
 
 ## 🧰 사용 기술
 
@@ -105,20 +103,21 @@ my-portfolio/
 > `index.html` 을 더블클릭해 여는 방식(`file://`)도 대부분 동작하지만,
 > 개발 중에는 자동 새로고침이 되는 Live Server 사용을 권장합니다.
 
-## ⚙️ 시작 전 반드시 수정할 것
+## ⚙️ 내용 수정하기
 
-`js/config.js` 상단의 `PROFILE` 을 본인 정보로 바꿉니다.
+페이지에 들어가는 정보는 `js/config.js` 상단에 모여 있습니다.
 
 ```js
 const PROFILE = {
   name: '해은',
-  githubUsername: 'your-github-id',   // ← 본인 GitHub 아이디
-  email: 'you@example.com',
+  githubUsername: 'haeunyn',          // Projects 섹션이 이 계정의 저장소를 불러옵니다
+  email: 'haeunyn@gmail.com',
   taglines: [ /* Hero 에 타이핑될 문장들 */ ],
 };
 ```
 
-이름·소개 문구는 `index.html` 의 Hero / About 섹션에서 직접 수정하세요.
+- 스킬 카드를 늘리거나 줄이려면 같은 파일의 `SKILLS` 배열을 수정하세요.
+- 이름·소개 문장은 `index.html` 의 Hero / About 섹션에서 직접 수정합니다.
 
 ## 📦 GitHub Pages 배포
 
@@ -127,12 +126,14 @@ git init
 git add .
 git commit -m "feat: 나를 소개하는 웹페이지 완성"
 git branch -M main
-git remote add origin https://github.com/<본인아이디>/<저장소이름>.git
+git remote add origin git@github.com:haeunyn/my-portfolio.git
 git push -u origin main
 ```
 
 GitHub 저장소 → **Settings → Pages → Source: Deploy from a branch → main / (root) → Save**
-1~2분 뒤 `https://<본인아이디>.github.io/<저장소이름>/` 에서 접속됩니다.
+1~2분 뒤 배포됩니다. (이 저장소는 이미 배포 완료: https://haeunyn.github.io/my-portfolio/)
+
+이후 수정 사항은 `git add -A && git commit -m "메시지" && git push` 만 하면 자동으로 재배포됩니다.
 
 > ⚠️ GitHub API 는 인증 없이 **시간당 60회** 제한이 있습니다.
 > 짧은 시간에 새로고침을 반복하면 403 응답이 오고, 이때는 의도한 대로 에러 상태 UI가 표시됩니다.
