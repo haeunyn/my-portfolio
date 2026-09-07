@@ -13,7 +13,7 @@
    ⚠️ 제출 전에 본인 정보로 바꿔주세요. GITHUB_USERNAME 이 틀리면
       Projects 섹션은 (의도대로) 에러 상태 UI 를 보여줍니다. */
 const PROFILE = {
-  name: '해은',
+  name: '하은',
   githubUsername: 'haeunyn',   // ← 본인 GitHub 아이디로 변경
   email: 'haeunyn@gmail.com',
   // Hero 섹션에서 한 글자씩 타이핑될 문장들

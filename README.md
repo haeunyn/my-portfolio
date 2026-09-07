@@ -40,7 +40,6 @@ my-portfolio/
 ├── images/
 │   ├── profile.svg     # 프로필 이미지
 │   └── favicon.svg     # 탭 아이콘
-├── docs/               # 동료평가 준비 자료 (설명 대본, 예상질문, 코드 해설)
 └── README.md
 ```
 
@@ -109,7 +108,7 @@ my-portfolio/
 
 ```js
 const PROFILE = {
-  name: '해은',
+  name: '하은',
   githubUsername: 'haeunyn',          // Projects 섹션이 이 계정의 저장소를 불러옵니다
   email: 'haeunyn@gmail.com',
   taglines: [ /* Hero 에 타이핑될 문장들 */ ],
